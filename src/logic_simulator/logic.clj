@@ -7,6 +7,11 @@
   {:AND {:inputs 2 :fn (fn [a b] (if (or (= :X a) (= :X b)) :X (min a b)))}
    :OR  {:inputs 2 :fn (fn [a b] (if (or (= :X a) (= :X b)) :X (max a b)))}
    :XOR {:inputs 2 :fn (fn [a b] (if (or (= :X a) (= :X b)) :X (if (= a b) 0 1)))}
+   :NAND {:inputs 2 :fn (fn [a b]
+                              (if (or (= :X a) (= :X b))
+                                :X
+                                (- 1 (min a b))))}
+
    :NOT {:inputs 1 :fn (fn [a] (if (= :X a) :X (- 1 a)))}
    :BUF {:inputs 1 :fn (fn [a] a)} ; Buffer (delay component)
    :INPUT {:inputs 0 :fn (fn [state] (:value state))} ; External input source
